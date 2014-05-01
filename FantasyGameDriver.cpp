@@ -7,7 +7,10 @@
 #include <vector>
 
 void battleArena(Creature &creature1, Creature &creature2);
+string getMenu();
+int validInput();
 int main(){
+	int menuChoice = 0;
 	srand ( time(NULL) ); //this gives different results every time without it, same sequence of numbers are always generated
 	std::vector<Creature*> creatureList;
 
@@ -27,7 +30,20 @@ int main(){
 	elf = new Elf(100, 100);
 	creatureList.push_back(elf);
 
-	battleArena(*creatureList[3], *human);
+	cout << "Welcome to the Fantasy Game!" << endl;
+	cout << "Please choose your monsters from the menu! -1 to quit!" << endl;
+	cout << getMenu() << endl;
+	menuChoice = validInput();
+	while(menuChoice != -1){
+		battleArena(*creatureList[menuChoice], *creatureList[menuChoice]);
+
+		//continue game
+		cout << "Please choose your monsters from the menu! -1 to quit!" << endl;
+		cout << getMenu() << endl;
+		menuChoice = validInput();
+	}
+
+
 
 	return 0;
 }
@@ -59,5 +75,25 @@ void battleArena(Creature &creature1, Creature &creature2){
 			cout << creature2.getSpecies() << " has " << creature2.getHitPoints() << " hits left" << "\n" << endl;
 		}
 	}
+}
 
+//get the menu
+string getMenu(){
+	string menu = "0: Human \n 1: Cyber Demon \n 2: Balrog \n 3: Elf"; 
+
+	return menu;
+}
+
+int validInput()
+{
+    int x;
+    std::cin >> x;
+    while(std::cin.fail() || x > 4 || x < -1)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout << "Bad entry. Please enter a valid menu entry: ";
+        std::cin >> x;
+    }
+    return x;
 }
