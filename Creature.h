@@ -7,7 +7,6 @@ private:
 	int hitPoints;                 //How much damage we can sustain
 public:
 	Creature();                   //initialize to human, 10 strengths, 10 hit points
-
 	Creature(int newStrength, int newHit);
 
 	// accessor methods //

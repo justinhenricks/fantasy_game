@@ -4,28 +4,33 @@
 #include "Cyberdemon.h"
 #include "Elf.h"
 #include "stdafx.h"
+#include <vector>
 
 int battleArena(Creature &creature1, Creature &creature2);
 
 int main(){
 	srand ( time(NULL) ); //this gives different results every time without it, same sequence of numbers are always generated
+	std::vector<Creature*> creatureList;
 
-	Human *justin;
-	justin = new Human(100,100);
+	Human *human;
+	human= new Human(100,100);
+	creatureList.push_back(human);
 
-	Cyberdemon *cyberDemonPaul;
-	cyberDemonPaul = new Cyberdemon(100, 100);
+	Cyberdemon *cyberDemon;
+	cyberDemon = new Cyberdemon(100, 100);
+	creatureList.push_back(cyberDemon);
 
-	Balrog *balrogBryan; 
-	balrogBryan = new Balrog(100, 100);
+	Balrog *balrog; 
+	balrog = new Balrog(100, 100);
+	creatureList.push_back(balrog);
 
-	Elf *elfMatt;
-	elfMatt = new Elf(100, 100);
+	Elf *elf;
+	elf = new Elf(100, 100);
+	creatureList.push_back(elf);
 
 	int result = 3; //my "status" variable, 3 = keep going
-	
 	while(result == 3){
-		result = battleArena(*elfMatt, *justin);
+		result = battleArena(*creatureList[3], *human);
 	}
 
 	return 0;
